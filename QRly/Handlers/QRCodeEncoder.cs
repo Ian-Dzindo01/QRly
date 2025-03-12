@@ -8,7 +8,7 @@ public enum QRMode
     Kanji
 }
 
-public static class QRCodeEncoder
+public static class QRHelper
 {
     public static QRMode DetermineMode(string input)
     {
@@ -39,5 +39,21 @@ public static class QRCodeEncoder
                 return false;
         }
         return true;
+    }
+
+    public static string GetCharacterCountIndicator(string input, QRMode mode)
+    {
+        int charCount = input.Length;
+        int bitLength = mode switch
+        {
+            QRMode.Numeric => 10,
+            QRMode.Alphanumeric => 9,
+            QRMode.Byte => 8,
+            QRMode.Kanji => 8,
+            _ => throw new ArgumentException("Unsupported mode")
+        };
+
+        string binary = Convert.ToString(charCount, 2);
+        return binary.PadLeft(bitLength, '0');
     }
 }
