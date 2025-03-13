@@ -1,8 +1,5 @@
-﻿using System.Text;
-Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+﻿using QRly.Helpers;
 
-
-foreach (var encoding in Encoding.GetEncodings())
-{
-    Console.WriteLine(encoding.Name);
-}
+Console.WriteLine(QRHelper.GetCharacterCountIndicator("123456", QRMode.Numeric));
+Console.WriteLine(QRHelper.GetCharacterCountIndicator("HELLO1", QRMode.Alphanumeric));
+Console.WriteLine(QRHelper.GetCharacterCountIndicator("Hello!", QRMode.Byte));

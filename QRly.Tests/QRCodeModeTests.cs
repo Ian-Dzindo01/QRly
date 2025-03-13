@@ -1,4 +1,6 @@
-﻿public class QRCodeModeTests
+﻿using QRly;
+
+public class QRCodeModeTests
 {
     [Theory]
     [InlineData("123456", QRMode.Numeric)]
@@ -11,6 +13,6 @@
 
     public void TestDetermineMode(string input, QRMode expected)
     {
-        Assert.Equal(expected, QRCodeEncoder.DetermineMode(input));
+        Assert.Equal(expected, QRHelper.DetermineMode(input));
     }
 }
