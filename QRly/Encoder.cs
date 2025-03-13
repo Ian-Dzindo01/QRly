@@ -64,5 +64,16 @@ namespace QRly.Encoder
             }
             return result;
         }
+
+        private static string EncodeByte(string input)
+        {
+            return string.Concat(input.Select(c => Convert.ToString((int)c, 2).PadLeft(8, '0')));
+        }
+
+        private static string EncodeKanji(string input)
+        {
+            throw new NotImplementedException("Kanji encoding is not implemented yet.");
+        }
+
     }
 }
