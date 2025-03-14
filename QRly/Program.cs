@@ -1,5 +1,8 @@
-﻿using QRly.Helpers;
+﻿using QRly.Encoder;
+using QRly.Helpers;
 
-Console.WriteLine(QRHelper.GetCharacterCountIndicator("123456", QRMode.Numeric));
-Console.WriteLine(QRHelper.GetCharacterCountIndicator("HELLO1", QRMode.Alphanumeric));
-Console.WriteLine(QRHelper.GetCharacterCountIndicator("Hello!", QRMode.Byte));
+string input = "HELLO CC WORLD";
+QRMode mode = QRMode.Byte;
+string encodedData = Encoder.EncodeQRCodeData(input, mode);
+Console.WriteLine(encodedData.Length);
+Console.WriteLine(encodedData);

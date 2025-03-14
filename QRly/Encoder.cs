@@ -26,7 +26,51 @@ namespace QRly.Encoder
                 _ => throw new ArgumentException("Unsupported mode")
             };
 
-            return modeIndicator + charCountIndicator + encodedData;
+            string fullBitString =
+                modeIndicator + " " +
+                charCountIndicator + " " +
+                encodedData + " ";
+
+            return PadBitString(fullBitString, mode);
+        }
+
+        private static string PadBitString(string bitString, QRMode mode)
+        {
+
+            // Version 4, level M = 512 bits
+            int totalCapacity = 512; // 64 codewords * 8 bits
+            string terminator = "0000 ";
+
+            bitString += terminator;
+
+            // Ensure its a multiple of 8
+            int currentBitLength = bitString.Length;
+            int remainingBits = currentBitLength % 8;
+            if (remainingBits > 0)
+            {
+                int paddingBits = 8 - remainingBits;
+                bitString += " ";
+                bitString = bitString.PadRight(currentBitLength + paddingBits, '0');
+            }
+
+            int finalLength = bitString.Length;
+
+            // Alternating padding
+            if (finalLength < totalCapacity)
+            {
+                while (finalLength < totalCapacity)
+                {
+                    bitString += " 11101100";
+                    finalLength += 8;
+                    if (finalLength < totalCapacity)
+                    {
+                        bitString += " 00010001";
+                        finalLength += 8;
+                    }
+                }
+            }
+
+            return bitString.Substring(0, totalCapacity);
         }
 
         private static string EncodeNumeric(string input)
