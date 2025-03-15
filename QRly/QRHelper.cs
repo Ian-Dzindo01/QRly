@@ -29,7 +29,8 @@ namespace QRly.Helpers
 
         public static string GetCharacterCountIndicator(string input, QRMode mode)
         {
-            int charCount = input.Length - 1;
+            int charCount = input.Length;
+            Console.WriteLine(charCount);
             int bitLength = mode switch
             {
                 QRMode.Numeric => 10,

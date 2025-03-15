@@ -1,8 +1,11 @@
 ﻿using QRly.Encoder;
 using QRly.Helpers;
 
-string input = "HELLO CC WORLD";
-QRMode mode = QRMode.Byte;
-string encodedData = Encoder.EncodeQRCodeData(input, mode);
-Console.WriteLine(encodedData.Length);
-Console.WriteLine(encodedData);
+string input = "222222222";
+QRMode mode = QRHelper.DetermineMode(input);
+List<string> encodedData = Encoder.EncodeQRCodeData(input, mode);
+
+foreach (var bitString in encodedData)
+{
+    Console.WriteLine(bitString);
+}

@@ -4,7 +4,7 @@ namespace QRly.Encoder
 {
     public static class Encoder
     {
-        public static string EncodeQRCodeData(string input, QRMode mode)
+        public static List<string> EncodeQRCodeData(string input, QRMode mode)
         {
             string modeIndicator = mode switch
             {
@@ -26,52 +26,59 @@ namespace QRly.Encoder
                 _ => throw new ArgumentException("Unsupported mode")
             };
 
-            string fullBitString =
-                modeIndicator + " " +
-                charCountIndicator + " " +
-                encodedData + " ";
+            List<string> fullBitStringParts = new List<string>
+            {
+                modeIndicator,
+                charCountIndicator,
+                encodedData
+            };
 
-            return PadBitString(fullBitString, mode);
+            return PadBitString(fullBitStringParts, mode);
         }
 
-        private static string PadBitString(string bitString, QRMode mode)
+        private static List<string> PadBitString(List<string> bitString, QRMode mode)
         {
+            const int totalCapacity = 512; // Version 4, Level M = 64 codewords * 8 bits
+            const string terminator = "0000";
+            const string padByte1 = "11101100"; // 0xEC
+            const string padByte2 = "00010001"; // 0x11
 
-            // Version 4, level M = 512 bits
-            int totalCapacity = 512; // 64 codewords * 8 bits
-            string terminator = "0000 ";
+            List<string> paddedBitStrings = new List<string>();
 
-            bitString += terminator;
-
-            // Ensure its a multiple of 8
-            int currentBitLength = bitString.Length;
-            int remainingBits = currentBitLength % 8;
-            if (remainingBits > 0)
+            foreach (var part in bitString)
             {
-                int paddingBits = 8 - remainingBits;
-                bitString += " ";
-                bitString = bitString.PadRight(currentBitLength + paddingBits, '0');
+                paddedBitStrings.Add(part);
             }
 
-            int finalLength = bitString.Length;
-
-            // Alternating padding
-            if (finalLength < totalCapacity)
+            int totalLength = paddedBitStrings.Sum(s => s.Length);
+            if (totalLength + terminator.Length > totalCapacity)
             {
-                while (finalLength < totalCapacity)
+                paddedBitStrings.Add(terminator.Substring(0, totalCapacity - totalLength));
+            }
+            else
+            {
+                paddedBitStrings.Add(terminator);
+            }
+
+            int remainingBits = paddedBitStrings.Sum(s => s.Length) % 8;
+            if (remainingBits > 0)
+            {
+                paddedBitStrings.Add(new string('0', 8 - remainingBits));
+            }
+
+            while (paddedBitStrings.Sum(s => s.Length) + 8 <= totalCapacity)
+            {
+                paddedBitStrings.Add(padByte1);
+
+                if (paddedBitStrings.Sum(s => s.Length) + 8 <= totalCapacity)
                 {
-                    bitString += " 11101100";
-                    finalLength += 8;
-                    if (finalLength < totalCapacity)
-                    {
-                        bitString += " 00010001";
-                        finalLength += 8;
-                    }
+                    paddedBitStrings.Add(padByte2);
                 }
             }
 
-            return bitString.Substring(0, totalCapacity);
+            return paddedBitStrings;
         }
+
 
         private static string EncodeNumeric(string input)
         {
