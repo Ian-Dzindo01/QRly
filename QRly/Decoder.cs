@@ -46,28 +46,32 @@ namespace QRly.Decoder
         public static string DecodeAlphanumeric(string bitString)
         {
             const string ALPHANUMERIC_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:";
-            string result = "";
+            StringBuilder result = new();
 
             for (int i = 0; i < bitString.Length;)
             {
                 if (bitString.Length - i >= 11)
                 {
                     int value = Convert.ToInt32(bitString.Substring(i, 11), 2);
-                    int first = value / 45;
-                    int second = value % 45;
-                    result += ALPHANUMERIC_CHARS[first].ToString() + ALPHANUMERIC_CHARS[second].ToString();
+                    result.Append(ALPHANUMERIC_CHARS[value / 45]);
+                    result.Append(ALPHANUMERIC_CHARS[value % 45]);
                     i += 11;
                 }
                 else if (bitString.Length - i >= 6)
                 {
                     int value = Convert.ToInt32(bitString.Substring(i, 6), 2);
-                    result += ALPHANUMERIC_CHARS[value].ToString();
+                    result.Append(ALPHANUMERIC_CHARS[value]);
                     i += 6;
+                }
+                else
+                {
+                    break;
                 }
             }
 
-            return result;
+            return result.ToString();
         }
+
 
         public static string DecodeByte(string bitString)
         {

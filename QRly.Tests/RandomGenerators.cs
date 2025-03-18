@@ -1,10 +1,10 @@
 ﻿namespace QRly.Tests.Generators
 {
-    public static class RandomGenerator
+    internal static class RandomGenerator
     {
         private static readonly Random random = new Random();
 
-        private static string GenerateRandomNumericString(int length)
+        public static string GenerateRandomNumericString(int length)
         {
             char[] digits = new char[length];
             for (int i = 0; i < length; i++)
@@ -14,7 +14,7 @@
             return new string(digits);
         }
 
-        private static string GenerateRandomAlphanumericString(int length)
+        public static string GenerateRandomAlphanumericString(int length)
         {
             const string ALPHANUMERIC_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:";
             char[] chars = new char[length];
@@ -25,7 +25,7 @@
             return new string(chars);
         }
 
-        private static string GenerateRandomByteString(int length)
+        public static string GenerateRandomByteString(int length)
         {
             byte[] bytes = new byte[length];
             random.NextBytes(bytes);
