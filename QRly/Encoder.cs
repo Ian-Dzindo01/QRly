@@ -80,7 +80,7 @@ namespace QRly.Encoder
         }
 
 
-        private static string EncodeNumeric(string input)
+        public static string EncodeNumeric(string input)
         {
             string result = "";
             for (int i = 0; i < input.Length; i += 3)
@@ -94,7 +94,7 @@ namespace QRly.Encoder
             return result;
         }
 
-        private static string EncodeAlphanumeric(string input)
+        public static string EncodeAlphanumeric(string input)
         {
             const string ALPHANUMERIC_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:";
             string result = "";
@@ -116,12 +116,12 @@ namespace QRly.Encoder
             return result;
         }
 
-        private static string EncodeByte(string input)
+        public static string EncodeByte(string input)
         {
             return string.Concat(input.Select(c => Convert.ToString((int)c, 2).PadLeft(8, '0')));
         }
 
-        private static string EncodeKanji(string input)
+        public static string EncodeKanji(string input)
         {
             throw new NotImplementedException("Kanji encoding is not implemented yet.");
         }

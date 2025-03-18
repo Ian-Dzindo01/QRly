@@ -4,7 +4,7 @@ namespace QRly.Decoder
 {
     public static class Decoder
     {
-        static string DecodeNumeric(string input)
+        public static string DecodeNumeric(string input)
         {
             string result = "";
             int i = 0;
