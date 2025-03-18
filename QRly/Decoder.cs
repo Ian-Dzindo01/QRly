@@ -12,23 +12,36 @@ namespace QRly.Decoder
             while (i < input.Length)
             {
                 int bitLength;
+                int digitCount;
+
                 if (input.Length - i >= 10)
+                {
                     bitLength = 10;
+                    digitCount = 3; // 3 digits in 10 bits
+                }
                 else if (input.Length - i >= 7)
+                {
                     bitLength = 7;
+                    digitCount = 2; // 2 digits in 7 bits
+                }
                 else
+                {
                     bitLength = 4;
+                    digitCount = 1; // 1 digit in 4 bits
+                }
 
                 string binChunk = input.Substring(i, bitLength);
                 int number = Convert.ToInt32(binChunk, 2);
 
-                result += number.ToString();
+                // Preserve leading zeroes
+                result += number.ToString().PadLeft(digitCount, '0'); // Preserve leading zeros
 
                 i += bitLength;
             }
 
             return result;
         }
+
 
         public static string DecodeAlphanumeric(string bitString)
         {
