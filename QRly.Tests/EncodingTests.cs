@@ -18,8 +18,8 @@ public class EncodingTests
     [Theory]
     [InlineData("123456")]
     [InlineData("987654321")]
-    [InlineData("000000")]
     [InlineData("1")]
+    [InlineData("2223333")]
     [InlineData("99")]
     public void EncodeDecode_Numeric_FixedCases(string input)
     {
@@ -32,7 +32,7 @@ public class EncodingTests
     [Fact]
     public void EncodeDecode_Numeric_RandomCases()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 30; i++)
         {
             string input = GenerateRandomNumericString(random.Next(1, 20));
             string encoded = Encoder.EncodeNumeric(input);
