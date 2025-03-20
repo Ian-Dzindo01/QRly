@@ -125,6 +125,5 @@ namespace QRly.Encoder
         {
             throw new NotImplementedException("Kanji encoding is not implemented yet.");
         }
-
     }
 }
