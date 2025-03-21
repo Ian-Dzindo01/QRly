@@ -4,7 +4,7 @@ namespace QRly.Encoder
 {
     public static class Encoder
     {
-        public static List<string> EncodeQRCodeData(string input, QRMode mode)
+        public static byte[] EncodeQRCodeData(string input, QRMode mode)
         {
             string modeIndicator = mode switch
             {
@@ -33,7 +33,19 @@ namespace QRly.Encoder
                 encodedData
             };
 
-            return PadBitString(fullBitStringParts, mode);
+            string bitString = string.Concat(PadBitString(fullBitStringParts, mode));
+
+            // Convert the binary string into a byte array
+            int byteCount = bitString.Length / 8;
+            byte[] byteArray = new byte[byteCount];
+
+            for (int i = 0; i < byteCount; i++)
+            {
+                string byteChunk = bitString.Substring(i * 8, 8); // Take 8 bits
+                byteArray[i] = Convert.ToByte(byteChunk, 2); // Convert "11001010" to byte
+            }
+
+            return byteArray;
         }
 
         private static List<string> PadBitString(List<string> bitString, QRMode mode)
