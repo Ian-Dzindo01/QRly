@@ -1,4 +1,4 @@
-﻿using QRly.Helpers;
+﻿using QRly.utils;
 
 public class QRCodeModeTests
 {

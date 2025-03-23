@@ -4,9 +4,18 @@ namespace QRly.Encoder
 {
     public static class Encoder
     {
-        public static byte[] EncodeQRCodeData(string input, QRMode mode)
+
+        public static byte[] GenerateQRCodeBytes(string input)
         {
-            string modeIndicator = mode switch
+            byte[] hexString = ReedSolomon.EncodeVersion4M(Encoder.EncodePayload(input));
+            return hexString;
+        }
+
+        public static byte[] EncodePayload(string input)
+        {
+            QRMode qRMode = QRHelper.DetermineMode(input);
+
+            string modeIndicator = qRMode switch
             {
                 QRMode.Numeric => "0001",
                 QRMode.Alphanumeric => "0010",
@@ -15,9 +24,9 @@ namespace QRly.Encoder
                 _ => throw new ArgumentException("Unsupported mode")
             };
 
-            string charCountIndicator = QRHelper.GetCharacterCountIndicator(input, mode);
+            string charCountIndicator = QRHelper.GetCharacterCountIndicator(input, qRMode);
 
-            string encodedData = mode switch
+            string encodedData = qRMode switch
             {
                 QRMode.Numeric => EncodeNumeric(input),
                 QRMode.Alphanumeric => EncodeAlphanumeric(input),
@@ -33,7 +42,7 @@ namespace QRly.Encoder
                 encodedData
             };
 
-            string bitString = string.Concat(PadBitString(fullBitStringParts, mode));
+            string bitString = string.Concat(PadBitString(fullBitStringParts, qRMode));
 
             // Convert the binary string into a byte array
             int byteCount = bitString.Length / 8;
