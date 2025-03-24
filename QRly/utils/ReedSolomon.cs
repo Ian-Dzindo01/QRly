@@ -1,4 +1,4 @@
-﻿namespace QRly.Encoder
+﻿namespace QRly.utils
 {
     public class ReedSolomon
     {
@@ -43,7 +43,7 @@
 
         private static byte GaloisMultiply(byte a, byte b)
         {
-            return (a == 0 || b == 0) ? (byte)0 : GF256_EXP[GF256_LOG[a] + GF256_LOG[b]];
+            return a == 0 || b == 0 ? (byte)0 : GF256_EXP[GF256_LOG[a] + GF256_LOG[b]];
         }
 
         public static byte[] EncodeVersion4M(byte[] data)
@@ -57,8 +57,8 @@
             Array.Copy(data, 0, block1, 0, blockSize);
             Array.Copy(data, blockSize, block2, 0, blockSize);
 
-            byte[] ecc1 = ReedSolomon.ComputeECC(block1, ecCodewords);
-            byte[] ecc2 = ReedSolomon.ComputeECC(block2, ecCodewords);
+            byte[] ecc1 = ComputeECC(block1, ecCodewords);
+            byte[] ecc2 = ComputeECC(block2, ecCodewords);
 
             byte[] finalCodewords = new byte[data.Length + 2 * ecCodewords];
             int index = 0;

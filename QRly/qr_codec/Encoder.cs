@@ -1,4 +1,4 @@
-﻿using QRly.Helpers;
+﻿using QRly.utils;
 
 namespace QRly.Encoder
 {

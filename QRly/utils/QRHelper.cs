@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace QRly.Helpers
+namespace QRly.utils
 {
     public enum QRMode
     {
