@@ -80,10 +80,8 @@ public class QRMatrix
         {1, 1, 1, 1, 1},
     };
 
-        PlacePattern(pattern, 6, 22);
-        PlacePattern(pattern, 22, 6);
+        PlacePattern(pattern, 26, 26);
     }
-
     private void AddFinderPatterns()
     {
         int[,] pattern =
@@ -144,7 +142,7 @@ public class QRMatrix
 
     public void RenderQRCode()
     {
-        string filename = "qr_output.bmp";
+        string filename = "qr_output.png";
         int scale = 10;
         using Bitmap bmp = new Bitmap(Size * scale, Size * scale);
         using Graphics g = Graphics.FromImage(bmp);
@@ -162,6 +160,6 @@ public class QRMatrix
             }
         }
 
-        bmp.Save(filename);
+        bmp.Save(filename, System.Drawing.Imaging.ImageFormat.Png);
     }
 }
