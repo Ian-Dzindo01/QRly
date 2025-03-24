@@ -102,7 +102,7 @@ public class QRMatrix
 
     private void AddDarkModule()
     {
-        matrix[8, 27] = 1;
+        matrix[26, 7] = 1;
     }
 
     private void ReserveFormatInformation()
@@ -122,10 +122,10 @@ public class QRMatrix
 
     private void AddTimingPatterns()
     {
-        for (int i = 8; i < Size - 8; i++)
+        for (int i = 8; i < Size - 7; i++)
         {
-            matrix[6, i] = i % 2;
-            matrix[i, 6] = i % 2;
+            matrix[6, i - 1] = i % 2;
+            matrix[i - 1, 6] = i % 2;
         }
     }
 
@@ -162,4 +162,5 @@ public class QRMatrix
 
         bmp.Save(filename, System.Drawing.Imaging.ImageFormat.Png);
     }
+
 }
