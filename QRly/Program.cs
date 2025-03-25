@@ -5,4 +5,4 @@ byte[] hexString = Encoder.GenerateQRCodeBytes(input);
 
 QRMatrix matrix = new QRMatrix();
 matrix.GenerateQRCode(input);
-//Console.WriteLine("Final QR Code Data: " + BitConverter.ToString(hexString));
+//Console.WriteLine("Final QR Code Data: " + hexString);

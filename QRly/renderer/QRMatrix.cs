@@ -37,6 +37,8 @@ public class QRMatrix
 
         //ApplyMasking();
 
+        PlaceDataBits(encodedData);
+
         RenderQRCode();
 
         Console.WriteLine($"QR Code generated.");
@@ -161,6 +163,65 @@ public class QRMatrix
         }
 
         bmp.Save(filename, System.Drawing.Imaging.ImageFormat.Png);
+    }
+
+    private void PlaceDataBits(byte[] data)
+    {
+        int bitIndex = 0; // Tracks the current bit in the data stream
+        int dataLength = data.Length * 8; // Total number of bits
+        int x = Size - 1; // Start from bottom-right corner
+        int y = Size - 1;
+        bool goingUp = true; // Direction flag
+
+        while (x > 0)
+        {
+            if (x == 6) x--; // Skip the vertical timing pattern column
+
+            for (int i = 0; i < Size; i++)
+            {
+                int currentY = goingUp ? (Size - 1 - i) : i; // Zigzag pattern
+
+                // Place bit in two adjacent columns (right to left)
+                for (int j = 0; j < 2; j++)
+                {
+                    int currentX = x - j;
+
+                    // Skip reserved areas (finder patterns, format areas, etc.)
+                    if (IsReserved(currentX, currentY))
+                        continue;
+
+                    if (bitIndex < dataLength)
+                    {
+                        int bit = (data[bitIndex / 8] >> (7 - (bitIndex % 8))) & 1;
+                        matrix[currentY, currentX] = bit;
+                        bitIndex++;
+                    }
+                }
+            }
+
+            x -= 2; // Move to the next column pair
+            goingUp = !goingUp; // Reverse direction
+        }
+    }
+    private bool IsReserved(int x, int y)
+    {
+        // Finder patterns and their separators (top-left, top-right, bottom-left)
+        if ((x < 9 && y < 9) || (x >= Size - 8 && y < 9) || (x < 9 && y >= Size - 8))
+            return true;
+
+        // Timing patterns (horizontal and vertical)
+        if (x == 6 || y == 6)
+            return true;
+
+        // Alignment pattern (centered at 26,26 for Version 4)
+        if ((x >= 24 && x <= 28) && (y >= 24 && y <= 28))
+            return true;
+
+        // Format information areas
+        if ((y == 8 && x < 9) || (x == 8 && y < 9) || (x == 8 && y >= Size - 8) || (y == 8 && x >= Size - 8))
+            return true;
+
+        return false; // Not reserved, can place data
     }
 
 }

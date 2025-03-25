@@ -1,0 +1,101 @@
+[33mcommit 5f705ce03f3ad44e1711af80bdb57effb47d7c2f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Ian-Dzindo01 <ian.dzindo01@gmail.com>
+Date:   Mon Mar 24 12:31:47 2025 +0100
+
+    Fix allignment pattern
+
+[33mcommit 388347017fb51c285d95a9dbc707cc12d7002cb7[m
+Author: Ian-Dzindo01 <ian.dzindo01@gmail.com>
+Date:   Mon Mar 24 10:59:47 2025 +0100
+
+    Basic outline
+
+[33mcommit 488703f2dde980df4571dd3da97b18ef77096119[m
+Author: Ian-Dzindo01 <ian.dzindo01@gmail.com>
+Date:   Sun Mar 23 16:54:24 2025 +0100
+
+    Refactoring and image generation
+
+[33mcommit 4578bc098e8a611f80c989cb4ef1503e9737723f[m
+Author: Ian-Dzindo01 <ian.dzindo01@gmail.com>
+Date:   Fri Mar 21 11:14:41 2025 +0100
+
+    Getting somewhere
+
+[33mcommit ac6d6461ebdca934ce23c8667cb61e7c1aa6cbfb[m
+Author: Ian-Dzindo01 <ian.dzindo01@gmail.com>
+Date:   Thu Mar 20 17:44:30 2025 +0100
+
+    Reed Solomon
+
+[33mcommit 3a7102c64c6a2196ea3286882714e469e9da0167[m
+Author: Ian-Dzindo01 <ian.dzindo01@gmail.com>
+Date:   Tue Mar 18 18:53:33 2025 +0100
+
+    Passing all tests
+
+[33mcommit d8841feb68a8539081c9639fafd67d9715fe3c67[m
+Author: Ian-Dzindo01 <ian.dzindo01@gmail.com>
+Date:   Tue Mar 18 18:06:20 2025 +0100
+
+    RAndom generators
+
+[33mcommit bbccd07516eb47622d1f935794fcef9f58af885f[m
+Author: Ian-Dzindo01 <ian.dzindo01@gmail.com>
+Date:   Tue Mar 18 17:18:48 2025 +0100
+
+    Fix leading zeroes
+
+[33mcommit 7744693e5ab3d2e0b02ad3ef1e1dd8073ac14002[m
+Author: Ian-Dzindo01 <ian.dzindo01@gmail.com>
+Date:   Tue Mar 18 13:43:22 2025 +0100
+
+    Add tests
+
+[33mcommit 51198b39cc902f97a440c748cde353ff359cc433[m
+Author: Ian-Dzindo01 <ian.dzindo01@gmail.com>
+Date:   Sun Mar 16 10:27:17 2025 +0100
+
+    More decoders
+
+[33mcommit e64fe3158b3f3a899bd1fb2b87ac52dbfe090983[m
+Author: Ian-Dzindo01 <ian.dzindo01@gmail.com>
+Date:   Sat Mar 15 17:08:44 2025 +0100
+
+    Decoders
+
+[33mcommit 43fbaf3ffebd8e1e0c34c8521b5c1536e936da8e[m
+Author: Ian-Dzindo01 <ian.dzindo01@gmail.com>
+Date:   Sat Mar 15 16:42:05 2025 +0100
+
+    Changes
+
+[33mcommit ad3d1c3de552e8ad481883c9cf52af99a1a6574d[m
+Author: Ian-Dzindo01 <ian.dzindo01@gmail.com>
+Date:   Fri Mar 14 19:21:15 2025 +0100
+
+    Changes
+
+[33mcommit 6f93a3a4dab8610a46cb7c61088f28ec92c3e029[m
+Author: Ian-Dzindo01 <ian.dzindo01@gmail.com>
+Date:   Thu Mar 13 13:25:19 2025 +0100
+
+    Finish encoding functions
+
+[33mcommit d64a6d9f52ec85860b7042ea7828e563390e45e7[m
+Author: Ian-Dzindo01 <ian.dzindo01@gmail.com>
+Date:   Thu Mar 13 12:27:31 2025 +0100
+
+    Numeric and alphanumeric encoding
+
+[33mcommit db9fd6f5c658740cc47a9f9606516ff381548846[m
+Author: Ian-Dzindo01 <ian.dzindo01@gmail.com>
+Date:   Wed Mar 12 19:41:09 2025 +0100
+
+    Changes
+
+[33mcommit 3bbf5d3e89a18933c95e8602f6c332867d029d6b[m
+Author: Ian-Dzindo01 <ian.dzindo01@gmail.com>
+Date:   Wed Mar 12 18:02:10 2025 +0100
+
+    First commit
